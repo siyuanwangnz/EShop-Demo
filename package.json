@@ -12,5 +12,8 @@
     "server": "yarn --cwd backend start",
     "client": "yarn --cwd frontend start",
     "dev": "concurrently \"yarn server\" \"yarn client\""
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
   }
 }
