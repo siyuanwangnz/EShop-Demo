@@ -1,0 +1,16 @@
+{
+  "name": "React-Node-Mongodb",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/siyuanwangnz/React-Node-Mongodb.git",
+  "author": "SteveW1004 <lmnwsy@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  },
+  "scripts": {
+    "server": "yarn --cwd backend start",
+    "client": "yarn --cwd frontend start",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
+  }
+}

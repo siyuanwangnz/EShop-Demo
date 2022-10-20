@@ -15,7 +15,7 @@ export default function Product() {
             setProduct(data);
         };
         fetchProduct();
-    }, []);
+    }, [location]);
 
     return (
         <div>
