@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
 import { useLocation, Link } from 'react-router-dom'
-import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
-import Rating from "../../compponents/Rating";
+import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap"
+import Rating from "../../compponents/Rating"
 
 export default function Product() {
     const location = useLocation()
 
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState([])
 
     useEffect(() => {
         const fetchProduct = async () => {
             const { data } = await axios.get(`/api/products/${location.state.id}`);
-            setProduct(data);
-        };
-        fetchProduct();
-    }, [location]);
+            setProduct(data)
+        }
+        fetchProduct()
+    }, [location])
 
     return (
         <div>
