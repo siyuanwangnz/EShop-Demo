@@ -8,7 +8,7 @@ import Footer from './compponents/Footer'
 function App() {
   const element = useRoutes(routes)
   return (
-    <>
+    <div>
       <Header />
       <main className="py-3">
         <Container>
@@ -16,7 +16,7 @@ function App() {
         </Container>
       </main>
       <Footer />
-    </>
+    </div >
   );
 }
 
