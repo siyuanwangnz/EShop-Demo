@@ -1,13 +1,22 @@
-import React from 'react'
-import products from "../Home/products";
-import { useLocation } from 'react-router-dom'
-import { Link } from 'react-router-dom'
-import Rating from "../../compponents/Rating";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useLocation, Link } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap";
+import Rating from "../../compponents/Rating";
 
 export default function Product() {
     const location = useLocation()
-    const product = products.find((p) => p._id === location.state.id);
+
+    const [product, setProduct] = useState([]);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const { data } = await axios.get(`/api/products/${location.state.id}`);
+            setProduct(data);
+        };
+        fetchProduct();
+    }, []);
+
     return (
         <div>
             <Link className="btn btn-light my-3" to="/">
@@ -55,8 +64,7 @@ export default function Product() {
                                 <Button
                                     className="btn-block"
                                     type="button"
-                                    disabled={product.countInStock === 0}
-                                >
+                                    disabled={product.countInStock === 0}>
                                     Add To Cart
                                 </Button>
                             </ListGroup.Item>
