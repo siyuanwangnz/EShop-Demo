@@ -3,6 +3,7 @@ import { Row, Col } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProducts } from '../../redux/slices/productsSlice'
 import Product from '../../compponents/Product'
+import Message from '../../compponents/Message'
 
 export default function Home() {
     const dispatch = useDispatch()
@@ -15,17 +16,19 @@ export default function Home() {
     return (
         <div>
             <h1>Products</h1>
-            {status === 'loading' ? <h2>Loading</h2> : error ? <h2>{error}</h2> : (
-                <Row>
-                    {
-                        products.map(product => (
-                            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                                <Product product={product} />
-                            </Col>
-                        ))
-                    }
-                </Row>
-            )}
+            {status === 'loading' ?
+                <h2>Loading</h2> : error ?
+                    <Message variant="danger">{error}</Message> : (
+                        <Row>
+                            {
+                                products.map(product => (
+                                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                                        <Product product={product} />
+                                    </Col>
+                                ))
+                            }
+                        </Row>
+                    )}
         </div>
     )
 }

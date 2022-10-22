@@ -8,8 +8,10 @@ const router = express.Router()
 // @route GET /api/products
 // @access Public
 router.get("/", asyncHandler(async (req, res) => {
+    // throw error for testing
     // res.status(404)
     // throw new Error('No Authorized')
+
     const products = await Product.find({})
     res.json(products)
 }))
