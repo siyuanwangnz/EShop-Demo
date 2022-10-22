@@ -11,7 +11,7 @@ export default function Home() {
     const { products, status, error } = useSelector((state) => state.products)
 
     useEffect(() => {
-        dispatch(fetchProducts(2000))
+        dispatch(fetchProducts({ delay: 2000 }))
     }, [dispatch])
 
     return (
@@ -29,7 +29,8 @@ export default function Home() {
                                 ))
                             }
                         </Row>
-                    )}
+                    )
+            }
         </div>
     )
 }

@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from "axios"
 
-export const fetchProducts = createAsyncThunk(
-    'fetchProducts',
-    async ({ delay }, { rejectWithValue }) => {
+export const fetchProduct = createAsyncThunk(
+    'fetchProduct',
+    async ({ id, delay }, { rejectWithValue }) => {
         try {
             // add delay for pending stage testing
             await new Promise((resolve) =>
                 setTimeout(() => resolve(), delay)
             )
-            const { data } = await axios.get('/api/products')
+            const { data } = await axios.get(`/api/products/${id}`)
             return data
         } catch (error) {
             // Use `err.response.data` as `action.payload` for a `rejected` action,
@@ -19,28 +19,27 @@ export const fetchProducts = createAsyncThunk(
     }
 )
 
-export const productsSlice = createSlice({
-    name: 'products',
+export const productSlice = createSlice({
+    name: 'product',
     initialState: {
-        products: [],
+        product: { reviews: [] },
         status: 'idle',
         error: ''
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchProducts.pending, (state) => {
+            .addCase(fetchProduct.pending, (state) => {
                 state.status = 'loading'
-                state.products = []
             })
-            .addCase(fetchProducts.fulfilled, (state, action) => {
+            .addCase(fetchProduct.fulfilled, (state, action) => {
                 state.status = 'idle'
-                state.products = action.payload
+                state.product = action.payload
             })
-            .addCase(fetchProducts.rejected, (state, action) => {
+            .addCase(fetchProduct.rejected, (state, action) => {
                 state.status = 'idle'
                 state.error = action.payload
             })
     },
 })
 
-export default productsSlice.reducer
+export default productSlice.reducer

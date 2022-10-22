@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import productReducer from './slices/productsSlice'
+import productsReducer from './slices/productsSlice'
+import productReducer from './slices/productSlice'
 
 export const store = configureStore({
     reducer: {
-        products: productReducer
+        products: productsReducer,
+        product: productReducer
     },
 });
