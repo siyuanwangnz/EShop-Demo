@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchProducts } from '../../redux/slices/productsSlice'
 import Product from '../../components/Product'
 import Message from '../../components/Message'
+import Loader from '../../components/Loader'
 
 export default function Home() {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ export default function Home() {
         <div>
             <h1>Products</h1>
             {status === 'loading' ?
-                <h2>Loading</h2> : error ?
+                <Loader /> : error ?
                     <Message variant="danger">{error}</Message> : (
                         <Row>
                             {
