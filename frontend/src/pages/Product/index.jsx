@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { useLocation, Link } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap"
-import Rating from "../../compponents/Rating"
+import Rating from "../../components/Rating"
 
 export default function Product() {
     const location = useLocation()

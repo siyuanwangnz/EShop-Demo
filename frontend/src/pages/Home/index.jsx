@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProducts } from '../../redux/slices/productsSlice'
-import Product from '../../compponents/Product'
-import Message from '../../compponents/Message'
+import Product from '../../components/Product'
+import Message from '../../components/Message'
 
 export default function Home() {
     const dispatch = useDispatch()
