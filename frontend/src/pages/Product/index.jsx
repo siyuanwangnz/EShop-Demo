@@ -1,15 +1,23 @@
-import React, { useEffect } from "react"
-import { useLocation, Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react"
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProduct } from '../../redux/slices/productSlice'
-import { Row, Col, ListGroup, Image, Card, Button } from "react-bootstrap"
+import { Row, Col, ListGroup, Image, Card, Button, Form } from "react-bootstrap"
 import Rating from "../../components/Rating"
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 
 export default function Product() {
+
+    const navigate = useNavigate()
+
+    // item quantity state 
+    const [qty, setQty] = useState(1)
+
+    // data from router link
     const location = useLocation()
 
+    // action and reducer from redux
     const dispatch = useDispatch()
     const { product, status, error } = useSelector((state) => state.product)
 
@@ -63,8 +71,26 @@ export default function Product() {
                                                 </Col>
                                             </Row>
                                         </ListGroup.Item>
+                                        {product.countInStock > 0 && (
+                                            <ListGroup.Item>
+                                                <Row>
+                                                    <Col>Quantity:</Col>
+                                                    <Col>
+                                                        <Form.Control as="select" value={qty} onChange={(e) => setQty(e.target.value)}>
+                                                            {[...Array(product.countInStock).keys()].map(x => (
+                                                                <option style={{ background: "#F8C8DC" }} key={x + 1} value={x + 1}>{x + 1}</option>
+                                                            ))}
+                                                        </Form.Control>
+                                                    </Col>
+                                                </Row>
+                                            </ListGroup.Item>
+                                        )}
                                         <ListGroup.Item>
                                             <Button
+                                                onClick={() => {
+                                                    // here send id through match
+                                                    navigate(`/cart/${location.state.id}?qty=${qty}`)
+                                                }}
                                                 className="btn-block"
                                                 type="button"
                                                 disabled={product.countInStock === 0}>
