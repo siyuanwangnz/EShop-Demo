@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useLocation, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchProduct } from '../../redux/slices/productSlice'
 import { Row, Col, ListGroup, Image, Card, Button, Form } from "react-bootstrap"
@@ -14,16 +14,16 @@ export default function Product() {
     // item quantity state 
     const [qty, setQty] = useState(1)
 
-    // data from router link
-    const location = useLocation()
+    // id from router link
+    const { id } = useParams()
 
     // action and reducer from redux
     const dispatch = useDispatch()
     const { product, status, error } = useSelector((state) => state.product)
 
     useEffect(() => {
-        dispatch(fetchProduct({ id: location.state.id, delay: 1000 }))
-    }, [dispatch, location])
+        dispatch(fetchProduct({ id, delay: 1000 }))
+    }, [dispatch, id])
 
     return (
         <div>
@@ -88,8 +88,9 @@ export default function Product() {
                                         <ListGroup.Item>
                                             <Button
                                                 onClick={() => {
-                                                    // here send id through match
-                                                    navigate(`/cart/${location.state.id}?qty=${qty}`)
+                                                    // here send id and qty through router params and search params
+                                                    // use useParms and useSearchParams to get
+                                                    navigate(`/cart/${id}?qty=${qty}`)
                                                 }}
                                                 className="btn-block"
                                                 type="button"
