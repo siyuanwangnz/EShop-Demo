@@ -14,6 +14,9 @@ export default [
         path: "/cart/:id", element: <Cart />
     },
     {
+        path: "/cart", element: <Cart />
+    },
+    {
         path: "/", element: <Navigate to="/home" />
     },
 ]

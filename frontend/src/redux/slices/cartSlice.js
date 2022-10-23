@@ -26,6 +26,15 @@ export const cartSlice = createSlice({
         status: 'idle',
         error: ''
     },
+    reducers: {
+        removeFromCart: (state, action) => {
+            const item = action.payload
+            state.cartItems = state.cartItems.filter((x) => x._id !== item._id)
+
+            // store cart items to browser storage
+            localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(addToCart.pending, (state) => {
@@ -54,5 +63,7 @@ export const cartSlice = createSlice({
             })
     },
 })
+
+export const { removeFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer

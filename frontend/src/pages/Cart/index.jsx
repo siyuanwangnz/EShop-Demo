@@ -3,7 +3,7 @@ import { useSearchParams, useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from "react-bootstrap"
 import Message from '../../components/Message'
-import { addToCart } from '../../redux/slices/cartSlice'
+import { addToCart, removeFromCart } from '../../redux/slices/cartSlice'
 import './index.module.css'
 
 export default function Cart() {
@@ -19,7 +19,9 @@ export default function Cart() {
     const { cartItems } = useSelector((state) => state.cart)
 
     useEffect(() => {
-        dispatch(addToCart({ id, qty, delay: 500 }))
+        if (id) {
+            dispatch(addToCart({ id, qty, delay: 500 }))
+        }
     }, [dispatch, id, qty])
 
     return (
@@ -29,7 +31,7 @@ export default function Cart() {
                 {cartItems.length === 0 ?
                     (
                         <Message>
-                            Your cart is empty <Link to="/">Go Back</Link>
+                            Your cart is empty <Link to="/home">Go Back</Link>
                         </Message>
                     ) : (
                         <ListGroup variant="flush">
@@ -58,7 +60,8 @@ export default function Cart() {
                                         <Col md={2}>
                                             <Button
                                                 type="button"
-                                                variant="light">
+                                                variant="light"
+                                                onClick={() => dispatch(removeFromCart(item))} >
                                                 <i className="fa fa-trash"></i>
                                             </Button>
                                         </Col>
