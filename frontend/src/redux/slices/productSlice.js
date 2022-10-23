@@ -3,7 +3,7 @@ import axios from "axios"
 
 export const fetchProduct = createAsyncThunk(
     'fetchProduct',
-    async ({ id, delay }, { rejectWithValue }) => {
+    async ({ id, delay = 0 }, { rejectWithValue }) => {
         try {
             // add delay for pending stage testing
             await new Promise((resolve) =>

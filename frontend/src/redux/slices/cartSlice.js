@@ -3,7 +3,7 @@ import axios from "axios"
 
 export const addToCart = createAsyncThunk(
     'addToCart',
-    async ({ id, qty, delay }, { rejectWithValue }) => {
+    async ({ id, qty, delay = 0 }, { rejectWithValue }) => {
         try {
             // add delay for pending stage testing
             await new Promise((resolve) =>

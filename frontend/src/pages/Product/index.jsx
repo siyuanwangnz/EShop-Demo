@@ -6,6 +6,7 @@ import { Row, Col, ListGroup, Image, Card, Button, Form } from "react-bootstrap"
 import Rating from "../../components/Rating"
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
+import './index.module.css'
 
 export default function Product() {
 
@@ -78,7 +79,7 @@ export default function Product() {
                                                     <Col>
                                                         <Form.Control as="select" value={qty} onChange={(e) => setQty(e.target.value)}>
                                                             {[...Array(product.countInStock).keys()].map(x => (
-                                                                <option style={{ background: "#F8C8DC" }} key={x + 1} value={x + 1}>{x + 1}</option>
+                                                                <option key={x + 1} value={x + 1}>{x + 1}</option>
                                                             ))}
                                                         </Form.Control>
                                                     </Col>
