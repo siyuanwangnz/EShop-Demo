@@ -1,0 +1,58 @@
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from "axios"
+
+export const addToCart = createAsyncThunk(
+    'addToCart',
+    async ({ id, qty, delay }, { rejectWithValue }) => {
+        try {
+            // add delay for pending stage testing
+            await new Promise((resolve) =>
+                setTimeout(() => resolve(), delay)
+            )
+            const { data } = await axios.get(`/api/products/${id}`)
+            return { ...data, qty }
+        } catch (error) {
+            // Use `err.response.data` as `action.payload` for a `rejected` action,
+            // by explicitly returning it using the `rejectWithValue()` utility
+            return rejectWithValue(error.response.data.message)
+        }
+    }
+)
+
+export const cartSlice = createSlice({
+    name: 'cart',
+    initialState: {
+        cartItems: [],
+        status: 'idle',
+        error: ''
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(addToCart.pending, (state) => {
+                state.status = 'loading'
+            })
+            .addCase(addToCart.fulfilled, (state, action) => {
+                state.status = 'idle'
+                const item = action.payload
+
+                const existItem = state.cartItems.find((x) => x._id === item._id);
+
+                if (existItem) {
+                    state.cartItems = state.cartItems.map((x) =>
+                        x._id === existItem._id ? item : x
+                    )
+                } else {
+                    state.cartItems = [...state.cartItems, item]
+                }
+
+                // store cart items to browser storage
+                localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+            })
+            .addCase(addToCart.rejected, (state, action) => {
+                state.status = 'idle'
+                state.error = action.payload
+            })
+    },
+})
+
+export default cartSlice.reducer

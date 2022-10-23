@@ -7,11 +7,12 @@ import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 
 export default function Home() {
+    // get action and reducer from redux store
     const dispatch = useDispatch()
     const { products, status, error } = useSelector((state) => state.products)
 
     useEffect(() => {
-        dispatch(fetchProducts({ delay: 2000 }))
+        dispatch(fetchProducts({ delay: 1000 }))
     }, [dispatch])
 
     return (

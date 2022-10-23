@@ -11,18 +11,18 @@ export default function Product() {
 
     const navigate = useNavigate()
 
-    // item quantity state 
+    // set item quantity state 
     const [qty, setQty] = useState(1)
 
-    // id from router link
+    // get id (params) from router-link
     const { id } = useParams()
 
-    // action and reducer from redux
+    // get action and reducer from redux store
     const dispatch = useDispatch()
     const { product, status, error } = useSelector((state) => state.product)
 
     useEffect(() => {
-        dispatch(fetchProduct({ id, delay: 1000 }))
+        dispatch(fetchProduct({ id, delay: 500 }))
     }, [dispatch, id])
 
     return (
