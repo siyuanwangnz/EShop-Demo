@@ -4,15 +4,19 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import productsReducer from './slices/productsSlice'
 import productReducer from './slices/productSlice'
 import cartReducer from './slices/cartSlice'
+import userReducer from './slices/userSlice'
 
 const CartItemsFromStorage = localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [];
 
+const userInfoFromStorage = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo"))
+    : null;
+
 const initialState = {
-    cart: {
-        cartItems: CartItemsFromStorage
-    }
+    cart: { cartItems: CartItemsFromStorage },
+    user: { userInfo: userInfoFromStorage }
 }
 
 export const store = configureStore({
@@ -20,6 +24,7 @@ export const store = configureStore({
         products: productsReducer,
         product: productReducer,
         cart: cartReducer,
+        user: userReducer,
     },
     initialState
 });
