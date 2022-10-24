@@ -11,7 +11,12 @@ export const userLogin = createAsyncThunk(
             )
 
             // set header config 
-            const config = { headers: { 'Content-type': 'application/json' } }
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }
 
             // post with json and header config
             const { data } = await axios.post(
@@ -31,9 +36,19 @@ export const userLogin = createAsyncThunk(
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        userInfo: {},
+        userInfo: null,
         status: 'idle',
         error: ''
+    },
+    reducers: {
+        userLogout: (state) => {
+            state.userInfo = null
+            // remove user info from browser storage
+            localStorage.removeItem('userInfo')
+
+            //redirect to login page
+            document.location.href = "/login"
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -44,7 +59,7 @@ export const userSlice = createSlice({
                 state.status = 'idle'
                 state.userInfo = action.payload
 
-                // store cart items to browser storage
+                // store user info to browser storage
                 localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
             })
             .addCase(userLogin.rejected, (state, action) => {
@@ -53,5 +68,7 @@ export const userSlice = createSlice({
             })
     },
 })
+
+export const { userLogout } = userSlice.actions;
 
 export default userSlice.reducer
