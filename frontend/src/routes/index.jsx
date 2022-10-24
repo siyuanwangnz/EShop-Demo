@@ -3,6 +3,7 @@ import Product from '../pages/Product'
 import Cart from '../pages/Cart'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
+import Profile from '../pages/Profile'
 import { Navigate } from 'react-router-dom'
 
 export default [
@@ -17,6 +18,9 @@ export default [
     },
     {
         path: "/register", element: <Register />
+    },
+    {
+        path: "/profile", element: <Profile />
     },
     {
         path: "/cart/:id", element: <Cart />
