@@ -30,10 +30,12 @@ export const productsSlice = createSlice({
         builder
             .addCase(fetchProducts.pending, (state) => {
                 state.status = 'loading'
+                state.error = null
                 state.products = []
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = 'idle'
+                state.error = null
                 state.products = action.payload
             })
             .addCase(fetchProducts.rejected, (state, action) => {

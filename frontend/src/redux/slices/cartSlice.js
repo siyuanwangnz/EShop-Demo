@@ -28,6 +28,8 @@ export const cartSlice = createSlice({
     },
     reducers: {
         removeFromCart: (state, action) => {
+            state.error = null
+
             const item = action.payload
             state.cartItems = state.cartItems.filter((x) => x._id !== item._id)
 
@@ -39,9 +41,11 @@ export const cartSlice = createSlice({
         builder
             .addCase(addToCart.pending, (state) => {
                 state.status = 'loading'
+                state.error = null
             })
             .addCase(addToCart.fulfilled, (state, action) => {
                 state.status = 'idle'
+                state.error = null
                 const item = action.payload
 
                 const existItem = state.cartItems.find((x) => x._id === item._id);
