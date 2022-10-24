@@ -24,7 +24,7 @@ export const cartSlice = createSlice({
     initialState: {
         cartItems: [],
         status: 'idle',
-        error: ''
+        error: null
     },
     reducers: {
         removeFromCart: (state, action) => {

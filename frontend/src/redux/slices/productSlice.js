@@ -24,7 +24,7 @@ export const productSlice = createSlice({
     initialState: {
         product: { reviews: [] },
         status: 'idle',
-        error: ''
+        error: null
     },
     extraReducers: (builder) => {
         builder
