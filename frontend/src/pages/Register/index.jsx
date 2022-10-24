@@ -24,7 +24,7 @@ export default function Register() {
 
     // get previous path
     const [search, setSearch] = useSearchParams()
-    const redirect = search.get('redirect')
+    const redirect = search.get('redirect') ? search.get('redirect') : '/'
 
     useEffect(() => {
         // navigate to previous path if register successes
