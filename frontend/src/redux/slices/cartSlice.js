@@ -31,7 +31,7 @@ export const cartSlice = createSlice({
             const item = action.payload
             state.cartItems = state.cartItems.filter((x) => x._id !== item._id)
 
-            // store cart items to browser storage
+            // store new cart items to browser storage
             localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
         }
     },
