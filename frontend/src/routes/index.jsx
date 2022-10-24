@@ -2,6 +2,7 @@ import Home from '../pages/Home'
 import Product from '../pages/Product'
 import Cart from '../pages/Cart'
 import Login from '../pages/Login'
+import Register from '../pages/Register'
 import { Navigate } from 'react-router-dom'
 
 export default [
@@ -13,6 +14,9 @@ export default [
     },
     {
         path: "/login", element: <Login />
+    },
+    {
+        path: "/register", element: <Register />
     },
     {
         path: "/cart/:id", element: <Cart />
