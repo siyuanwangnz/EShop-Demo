@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../redux/slices/userSlice'
 
 export default function Header() {
+
+    const location = useLocation()
 
     // get action and reducer from redux store
     const dispatch = useDispatch()
@@ -33,7 +35,8 @@ export default function Header() {
                                 </ul>
                             </li>
                         ) : (
-                            <Link className="nav-link" to="/login">
+                            // navigate to login page with search params (current path)
+                            <Link className="nav-link" to={`/login/?redirect=${location.pathname}`}>
                                 <i className="fas fa-user" />{' '}LOG IN
                             </Link>
                         )}

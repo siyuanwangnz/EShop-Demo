@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { userRegister } from '../../redux/slices/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../../components/FormContainer'
@@ -10,8 +10,6 @@ import Loader from '../../components/Loader'
 export default function Register() {
 
     const navigate = useNavigate()
-
-    const location = useLocation()
 
     // set email, password, confirmed password, password message state
     const [name, setName] = useState('')
@@ -24,13 +22,12 @@ export default function Register() {
     const dispatch = useDispatch()
     const { userInfo, status, error } = useSelector((state) => state.user)
 
-    // previous URL
-    const redirect = location.search ? location.search.split('=')[1] : '/'
-
-    console.log(redirect)
+    // get previous path
+    const [search, setSearch] = useSearchParams()
+    const redirect = search.get('redirect')
 
     useEffect(() => {
-        // navigate to previous URL if login successes
+        // navigate to previous path if register successes
         if (userInfo) {
             navigate(redirect)
         }
@@ -99,6 +96,7 @@ export default function Register() {
                 <Row className="py-2">
                     <Col>
                         Already Have An Account?{' '}
+                        {/* navigate to register page with search params (previous path) */}
                         <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Login</Link>
                     </Col>
                 </Row>
