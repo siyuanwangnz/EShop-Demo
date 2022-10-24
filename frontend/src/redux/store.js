@@ -26,5 +26,5 @@ export const store = configureStore({
         cart: cartReducer,
         user: userReducer,
     },
-    initialState
+    preloadedState: initialState
 });
