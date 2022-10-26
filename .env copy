@@ -1,4 +1,4 @@
 NODE_ENV=development
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/test
+MONGO_URI=mongodb+srv://root:wsy199108027@cluster0.ik8cb8p.mongodb.net
 JWT_SECRET=dasdawdxcxaawdwd
