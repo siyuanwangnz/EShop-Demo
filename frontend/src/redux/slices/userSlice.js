@@ -13,8 +13,7 @@ export const userLogin = createAsyncThunk(
             // set header config 
             const config = {
                 headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json;charset=UTF-8'
                 }
             }
 
@@ -45,8 +44,7 @@ export const userRegister = createAsyncThunk(
             // set header config 
             const config = {
                 headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json;charset=UTF-8'
                 }
             }
 
@@ -82,7 +80,6 @@ export const updateProfile = createAsyncThunk(
             const config = {
                 headers: {
                     'Content-Type': 'application/json;charset=UTF-8',
-                    'Access-Control-Allow-Origin': '*',
                     Authorization: `Bearer ${userInfo.token}`,
                 }
             }
