@@ -20,7 +20,7 @@ export const userLogin = createAsyncThunk(
 
             // post with json and header config
             const { data } = await axios.post(
-                '/api/users/login',
+                `${process.env.REACT_APP_BASE_URL}/api/users/login`,
                 { email, password },
                 config
             )
@@ -52,7 +52,7 @@ export const userRegister = createAsyncThunk(
 
             // post with json and header config
             const { data } = await axios.post(
-                '/api/users',
+                `${process.env.REACT_APP_BASE_URL}/api/users`,
                 { name, email, password },
                 config
             )
@@ -89,7 +89,7 @@ export const updateProfile = createAsyncThunk(
 
             // post with json and header config
             const { data } = await axios.put(
-                '/api/users/profile',
+                `${process.env.REACT_APP_BASE_URL}/api/users/profile`,
                 updatedUser,
                 config
             )

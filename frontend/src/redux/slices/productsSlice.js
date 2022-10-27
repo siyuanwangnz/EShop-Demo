@@ -9,7 +9,7 @@ export const fetchProducts = createAsyncThunk(
             await new Promise((resolve) =>
                 setTimeout(() => resolve(), delay)
             )
-            const { data } = await axios.get('/api/products')
+            const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products`)
             return data
         } catch (error) {
             // Use `err.response.data` as `action.payload` for a `rejected` action,
