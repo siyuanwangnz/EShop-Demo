@@ -2,6 +2,7 @@ import express from "express"
 import connectDB from './config/db.js'
 import dotenv from "dotenv"
 import colors from 'colors'
+import cors from 'cors'
 import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
 
 import productRoutes from './routes/productRoutes.js'
@@ -12,6 +13,8 @@ dotenv.config()
 connectDB()
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.json())
 
