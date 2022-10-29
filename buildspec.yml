@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16 
+    commands:
+      - echo Start
+  pre_build:
+    commands:
+      - echo Install Source NPM Dependencies
+      - cd ./frontend/
+      - npm install
+  build:
+    commands:
+      - echo Build and Deploy on `date`
+      - yarn deploy
+  post_build:
+    commands:
+      - echo Finish on `date
