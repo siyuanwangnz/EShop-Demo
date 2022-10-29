@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16 
+    commands:
+      - echo Start
+
+      - echo Install Serverless
+      - npm install -g serverless
+  pre_build:
+    commands:
+      - echo Install Source NPM Dependencies
+      - cd ./backend/
+      - npm install
+  build:
+    commands:
+      - echo Build and Deploy on `date`
+      - yarn deploy
+  post_build:
+    commands:
+      - echo Finish on `date
