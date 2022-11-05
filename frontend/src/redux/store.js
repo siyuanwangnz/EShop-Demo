@@ -8,14 +8,21 @@ import userReducer from './slices/userSlice'
 
 const CartItemsFromStorage = localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
-    : [];
+    : []
+
+const ShippingAddressFromStorage = localStorage.getItem("shippingAddress")
+    ? JSON.parse(localStorage.getItem("shippingAddress"))
+    : {}
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
-    : null;
+    : null
 
 const initialState = {
-    cart: { cartItems: CartItemsFromStorage },
+    cart: {
+        cartItems: CartItemsFromStorage,
+        shippingAddress: ShippingAddressFromStorage,
+    },
     user: { userInfo: userInfoFromStorage }
 }
 
@@ -27,4 +34,4 @@ export const store = configureStore({
         user: userReducer,
     },
     preloadedState: initialState
-});
+})

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useSearchParams, useParams, Link } from 'react-router-dom'
+import { useSearchParams, useParams, useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from "react-bootstrap"
 import Message from '../../components/Message'
@@ -7,6 +7,8 @@ import { addToCart, removeFromCart } from '../../redux/slices/cartSlice'
 import './index.module.css'
 
 export default function Cart() {
+    const navigate = useNavigate()
+
     // get item quantity (search params) from router-useNavigate
     const [search, setSearch] = useSearchParams()
     const qty = Number(search.get('qty'))
@@ -85,6 +87,11 @@ export default function Cart() {
                         </ListGroup.Item>
                         <ListGroup.Item>
                             <Button
+                                onClick={() => {
+                                    // naviagte to login page with search params (shipping page)
+                                    // if user exiests in login page, navigate to shipping page
+                                    navigate("/login?redirect=/shipping")
+                                }}
                                 type="button"
                                 className="btn-block"
                                 disabled={cartItems.length === 0} >

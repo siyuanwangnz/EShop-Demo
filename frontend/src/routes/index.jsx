@@ -4,6 +4,7 @@ import Cart from '../pages/Cart'
 import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Profile from '../pages/Profile'
+import Shipping from '../pages/Shipping'
 import { Navigate } from 'react-router-dom'
 
 export default [
@@ -27,6 +28,9 @@ export default [
     },
     {
         path: "/cart", element: <Cart />
+    },
+    {
+        path: "/shipping", element: <Shipping />
     },
     {
         path: "/", element: <Navigate to="/home" />
