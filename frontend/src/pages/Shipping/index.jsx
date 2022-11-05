@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
 import FormContainer from '../../components/FormContainer'
@@ -6,6 +7,7 @@ import CheckoutSteps from '../../components/CheckoutSteps'
 import { saveShippingAddress } from '../../redux/slices/cartSlice'
 
 export default function Shipping() {
+    const navigate = useNavigate()
 
     // get action and reducer from redux store
     const dispatch = useDispatch()
@@ -21,6 +23,7 @@ export default function Shipping() {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(saveShippingAddress({ address, city, postalCode, country }))
+        navigate("/payment")
     }
 
     return (
