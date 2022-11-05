@@ -36,7 +36,7 @@ export default function Header() {
                             </li>
                         ) : (
                             // navigate to login page with search params (current path)
-                            <Link className="nav-link" to={`/login/?redirect=${location.pathname}`}>
+                            <Link className="nav-link" to={`/login?redirect=${location.pathname}`}>
                                 <i className="fas fa-user" />{' '}LOG IN
                             </Link>
                         )}
