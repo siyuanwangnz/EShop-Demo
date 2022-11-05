@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Profile from '../pages/Profile'
 import Shipping from '../pages/Shipping'
+import Payment from '../pages/Payment'
 import { Navigate } from 'react-router-dom'
 
 export default [
@@ -31,6 +32,9 @@ export default [
     },
     {
         path: "/shipping", element: <Shipping />
+    },
+    {
+        path: "/payment", element: <Payment />
     },
     {
         path: "/", element: <Navigate to="/home" />

@@ -6,12 +6,16 @@ import productReducer from './slices/productSlice'
 import cartReducer from './slices/cartSlice'
 import userReducer from './slices/userSlice'
 
-const CartItemsFromStorage = localStorage.getItem("cartItems")
+const cartItemsFromStorage = localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : []
 
-const ShippingAddressFromStorage = localStorage.getItem("shippingAddress")
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
     ? JSON.parse(localStorage.getItem("shippingAddress"))
+    : {}
+
+const paymentMethodFromStorage = localStorage.getItem("paymentMethod")
+    ? JSON.parse(localStorage.getItem("paymentMethod"))
     : {}
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
@@ -20,8 +24,9 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 
 const initialState = {
     cart: {
-        cartItems: CartItemsFromStorage,
-        shippingAddress: ShippingAddressFromStorage,
+        cartItems: cartItemsFromStorage,
+        shippingAddress: shippingAddressFromStorage,
+        paymentMethod: paymentMethodFromStorage,
     },
     user: { userInfo: userInfoFromStorage }
 }
