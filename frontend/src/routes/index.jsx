@@ -7,6 +7,7 @@ import Profile from '../pages/Profile'
 import Shipping from '../pages/Shipping'
 import Payment from '../pages/Payment'
 import PlaceOrder from '../pages/PlaceOrder'
+import Order from '../pages/Order'
 import { Navigate } from 'react-router-dom'
 
 export default [
@@ -39,6 +40,9 @@ export default [
     },
     {
         path: "/placeorder", element: <PlaceOrder />
+    },
+    {
+        path: "/orders/:id", element: <Order />
     },
     {
         path: "/", element: <Navigate to="/home" />
