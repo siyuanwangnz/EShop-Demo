@@ -20,4 +20,4 @@ phases:
       - yarn deploy
   post_build:
     commands:
-      - echo Finish on `date
+      - echo Finish on `date`
