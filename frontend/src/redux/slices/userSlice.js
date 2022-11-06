@@ -84,7 +84,7 @@ export const updateProfile = createAsyncThunk(
                 }
             }
 
-            // post with json and header config
+            // put with json and header config
             const { data } = await axios.put(
                 `${process.env.REACT_APP_BASE_URL}/api/users/profile`,
                 updatedUser,
