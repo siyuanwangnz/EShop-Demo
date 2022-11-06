@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import Message from '../../components/Message'
@@ -7,6 +7,7 @@ import Loader from '../../components/Loader'
 import { getOrder, payOrder, deliverOrder } from '../../redux/slices/orderSlice'
 
 export default function Order() {
+    const navigate = useNavigate()
 
     // get id (params) from router-link
     const { id } = useParams()
@@ -14,9 +15,15 @@ export default function Order() {
     // get action and reducer from redux store
     const dispatch = useDispatch()
     const { order, status, error } = useSelector((state) => state.order)
+    const { userInfo } = useSelector((state) => state.user)
 
     useEffect(() => {
-        dispatch(getOrder({ id, delay: 1000 }))
+        // navigate to login page if user is not logged in
+        if (!userInfo) {
+            navigate('/login')
+        } else {
+            dispatch(getOrder({ id, delay: 1000 }))
+        }
     }, [dispatch, id])
 
     const paymentHandler = (isPaid) => {
