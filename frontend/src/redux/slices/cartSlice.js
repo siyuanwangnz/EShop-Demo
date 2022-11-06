@@ -10,7 +10,14 @@ export const addToCart = createAsyncThunk(
                 setTimeout(() => resolve(), delay)
             )
             const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/products/${id}`)
-            return { ...data, qty }
+            return {
+                product: data._id,
+                name: data.name,
+                image: data.image,
+                price: data.price,
+                countInStock: data.countInStock,
+                qty
+            }
         } catch (error) {
             // Use `err.response.data` as `action.payload` for a `rejected` action,
             // by explicitly returning it using the `rejectWithValue()` utility
@@ -31,10 +38,18 @@ export const cartSlice = createSlice({
             state.error = null
 
             const item = action.payload
-            state.cartItems = state.cartItems.filter((x) => x._id !== item._id)
+            state.cartItems = state.cartItems.filter((x) => x.product !== item.product)
 
             // store new cart items to browser storage
             localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+        },
+        removeAll: (state) => {
+            state.error = null
+
+            state.cartItems = []
+
+            // remove items from browser storage
+            localStorage.removeItem('cartItems')
         },
         saveShippingAddress: (state, action) => {
             state.shippingAddress = action.payload
@@ -60,11 +75,11 @@ export const cartSlice = createSlice({
                 state.error = null
                 const item = action.payload
 
-                const existItem = state.cartItems.find((x) => x._id === item._id);
+                const existItem = state.cartItems.find((x) => x.product === item.product);
 
                 if (existItem) {
                     state.cartItems = state.cartItems.map((x) =>
-                        x._id === existItem._id ? item : x
+                        x.product === existItem.product ? item : x
                     )
                 } else {
                     state.cartItems = [...state.cartItems, item]
@@ -80,6 +95,6 @@ export const cartSlice = createSlice({
     },
 })
 
-export const { removeFromCart, saveShippingAddress, savePaymentMethod } = cartSlice.actions;
+export const { removeFromCart, removeAll, saveShippingAddress, savePaymentMethod } = cartSlice.actions
 
 export default cartSlice.reducer

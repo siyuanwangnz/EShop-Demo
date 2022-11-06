@@ -38,20 +38,20 @@ export default function Cart() {
                     ) : (
                         <ListGroup variant="flush">
                             {cartItems.map((item) => (
-                                <ListGroup.Item key={item._id}>
+                                <ListGroup.Item key={item.product}>
                                     <Row>
                                         <Col md={2}>
                                             <Image src={item.image} alt={item.name} fluid rounded />
                                         </Col>
                                         <Col md={3}>
-                                            <Link to={`/products/${item._id}`}>{item.name}</Link>
+                                            <Link to={`/products/${item.product}`}>{item.name}</Link>
                                         </Col>
                                         <Col md={2}>${item.price}</Col>
                                         <Col md={2}>
                                             <Form.Control
                                                 as="select"
                                                 value={item.qty}
-                                                onChange={(e) => dispatch(addToCart({ id: item._id, qty: Number(e.target.value) }))}>
+                                                onChange={(e) => dispatch(addToCart({ id: item.product, qty: Number(e.target.value) }))}>
                                                 {[...Array(item.countInStock).keys()].map((x) => (
                                                     <option key={x + 1} value={x + 1}>
                                                         {x + 1}
